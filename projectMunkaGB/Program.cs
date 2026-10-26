@@ -30,6 +30,7 @@ namespace projectMunkaGB
 
             do
             {
+                HP = 100;
                 Console.Clear();
                 Console.WriteLine("Üdvözlünk a kalandjátékunkban!");
 
@@ -53,7 +54,9 @@ namespace projectMunkaGB
                 Console.Clear();
 
             bevevezto:
-                string kezdo = "Egy szép őszi napon te és a barátaid elkezdtetek egy túrán gondolkozni Cuha-völgybe.. \n Viszont egyik haverod egy csavart rakott a túrába,ő azt mondta este menjetek,mert az sokkal viccesebb. \n Ti az elején hezitáltatok,de végül bele mentetek.\n Rá egy hétre el is indultattok! Kocsival mentettek fél órát utaztattok,már sötétt volt és elég ijesztő volt hogy csak ti vagytok az utakon.\n";
+                Console.Clear();
+                Console.WriteLine("A játékban a döntéseid befolyásolják a történet alakulását, ezért figyelj jól a választásaidra!\n\n");   
+                string kezdo = "Egy szép őszi napon te és a barátaid elkezdtetek egy túrán gondolkozni a Cuha-völgybe. \r\n Viszont egyik haverod egy csavart rakott a túrába: ő azt mondta, este menjetek, mert az sokkal viccesebb. \r\n Ti az elején hezitáltatok, de végül belementetek.\r\n Rá egy hétre el is indultatok! \r\n Kocsival mentetek, fél órát utaztatok, már sötét volt, és elég ijesztő volt, hogy csak ti vagytok az utakon.\r\n";
 
                 string[] szavakBeve = kezdo.Split(' ');
 
@@ -86,7 +89,7 @@ namespace projectMunkaGB
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Clear();
 
-                string kezdo2 = "Mikor oda értetek a Cuha-völgybe,elkezdtetek túrázni.\n Egyre mélyebbre mentettek a völgybe.\n Fél óra után elkezdtettek rakni egy kis tábor tüzet,mindeki szedett faágakat.\n Miután megettétek az ennivalókat, eloltottátok a tüzet és indultattok tovább.\n Viszont neked ki kötődött a cipőd,ezért megálltál bekötni.\n Viszont amikor felnéztél már nem volt ott senki...egyedül maradtál...\n";
+                string kezdo2 = "Mikor odaértetek a Cuha-völgybe, elkezdtetek túrázni.\n\r\nEgyre mélyebbre mentetek a völgybe.\n\r\nFél óra után elkezdtetek rakni egy kis tábortüzet, mindenki szedett faágakat.\n\r\nMiután megettétek az ennivalót, eloltottátok a tüzet és indultatok tovább.\n\r\nViszont neked kikötődött a cipőd, ezért megálltál bekötni.\n\r\nViszont amikor felnéztél, már nem volt ott senki... egyedül maradtál...\n\n";
 
                 string[] szavakBeve2 = kezdo2.Split(' ');
 
@@ -97,7 +100,7 @@ namespace projectMunkaGB
                     Thread.Sleep(150);
                 }
 
-                string kezdo3 = $"\nA sötétségben,csak 1 zseblámpád van és egy telefonod..de persze nincs térerőd...Mit teszel {nev}?\n Előre,Jobbra vagy Balra?\n";
+                string kezdo3 = $"\nA sötétségben,csak 1 zseblámpád van és egy telefonod..de persze nincs térerőd...\r\n Mit teszel {nev}?\n Előre,Jobbra vagy Balra?\n";
 
                 string[] szavakBeve3 = kezdo3.Split(' ');
 
@@ -107,13 +110,28 @@ namespace projectMunkaGB
                     Thread.Sleep(150);
                 }
 
-                elagazasElso = Console.ReadKey(true).Key;
-                Console.Clear();
 
                 // ELSŐ VÁLASZTÁS: ELŐRE
+                do
+                {
+                    elagazasElso = Console.ReadKey(true).Key;
+
+                    if (elagazasElso != ConsoleKey.UpArrow &&
+                        elagazasElso != ConsoleKey.LeftArrow &&
+                        elagazasElso != ConsoleKey.RightArrow)
+                    {
+                        Console.WriteLine(
+                            "\nHibás választás! Használd a nyilakat!"
+                        );
+                    }
+                } while (elagazasElso != ConsoleKey.UpArrow &&
+         elagazasElso != ConsoleKey.LeftArrow &&
+         elagazasElso != ConsoleKey.RightArrow);
+
+                Console.Clear();
                 if (elagazasElso == ConsoleKey.UpArrow)
                 {
-                    string egy = $"Elindultál előre. Körülbelül 10 perc után elértél a völgy mélyében egy kis tavat és egy újabb elágazást.\n {nev} merre mész?\n Jobbra vagy Balra?\n";
+                    string egy = $"Elindultál előre. Körülbelül 10 perc után elértél a völgy mélyében egy kis tavat és egy újabb elágazást.\n {nev} merre mész?\r\n Jobbra vagy Balra?\n";
 
                     string[] szavakEgy = egy.Split(' ');
 
@@ -123,13 +141,27 @@ namespace projectMunkaGB
                         Thread.Sleep(150);
                     }
 
-                    elagazas1 = Console.ReadKey(true).Key;
-                    Console.Clear();
 
+                    do
+                    {
+                        elagazas1 = Console.ReadKey(true).Key;
+
+                        if (elagazas1 != ConsoleKey.RightArrow &&
+                            elagazas1 != ConsoleKey.LeftArrow)
+                        {
+                            Console.WriteLine(
+                                "\nHibás választás! Használd a balra vagy jobbra nyilat!"
+                            );
+                        }
+
+                    } while (elagazas1 != ConsoleKey.RightArrow &&
+                             elagazas1 != ConsoleKey.LeftArrow);
+
+                    Console.Clear();
                     // MÁSODIK VÁLASZTÁS: JOBBRA
                     if (elagazas1 == ConsoleKey.RightArrow)
                     {
-                        string jobbra1 = "Elindultál jobbra, egy kis tisztásra értél, ahol egy kis kunyhót találtál.\n A kunyhóban egy idős bácsi lakott, aki elmondta hogy a völgyet kívül belül ismeri, viszont csak ha jó választ adsz akkor vezet ki.\n";
+                        string jobbra1 = "Elindultál jobbra, egy kis tisztásra értél, ahol egy kis kunyhót találtál.\r\n A kunyhóban egy idős bácsi lakott, aki elmondta, hogy a völgyet kívül-belül ismeri, viszont csak akkor vezet ki, ha jó választ adsz.\r\n";
 
                         Console.ForegroundColor = ConsoleColor.DarkRed;
 
@@ -172,7 +204,7 @@ namespace projectMunkaGB
                         }
 
                     kerdes:
-                        Console.WriteLine("\nAdy Endre melyik kötetével indult el hivatalosan a magyar irodalmi modernség 1906-ban? (1: Új versek | 2: Vér és arany)");
+                        Console.WriteLine("\nAdy Endre melyik kötetével indult el hivatalosan a magyar irodalmi modernség 1906-ban?\r\n (1: Új versek | 2: Vér és arany)");
 
                         ConsoleKey valasztas = Console.ReadKey(true).Key;
 
@@ -184,6 +216,7 @@ namespace projectMunkaGB
                         {
                             HP = HP - 50;
                             Console.WriteLine($"HP: {HP}");
+                            Console.Clear();
                             goto kerdes1;
                         }
                         else
@@ -198,7 +231,7 @@ namespace projectMunkaGB
                         Console.Clear();
                         Console.WriteLine("Hibás válasz!");
                         Console.WriteLine($"Jelenlegi HP: {HP}");
-                        Console.WriteLine("\nArany János melyik híres történelmi balladájában jelenik meg a bűn és bűnhődés lélektani drámája a megőrülésen keresztül? (1: Tetemre hívás | 2: Ágnes asszony)");
+                        Console.WriteLine("\nArany János melyik híres történelmi balladájában jelenik meg a bűn és bűnhődés lélektani drámája a megőrülésen keresztül?\r\n (1: Tetemre hívás | 2: Ágnes asszony)");
 
                         valasztas2 = Console.ReadKey(true).Key;
 
@@ -222,6 +255,7 @@ namespace projectMunkaGB
                         {
                             Console.WriteLine("\nNincs ilyen választási lehetőség. Próbáld újra.");
                             Thread.Sleep(1500);
+                            Console.Clear();
                             goto kerdes1;
                         }
                     }
@@ -243,7 +277,7 @@ namespace projectMunkaGB
 
                         Console.WriteLine("\n\nNyomj meg egy billentyűt a folytatáshoz...");
                         bilo = Console.ReadKey(true).Key;
-                        Thread.Sleep(5000);
+                        Thread.Sleep(50);
                         HP = HP - 100;
 
                         goto veg2;
@@ -252,6 +286,7 @@ namespace projectMunkaGB
                     {
                         Console.WriteLine("Nincs ilyen választási lehetőség.");
                         Thread.Sleep(1500);
+                        Console.Clear();
                         goto jatekVegeCiklus;
                     }
                 }
@@ -260,7 +295,7 @@ namespace projectMunkaGB
                 {
                     Console.Clear();
 
-                    string bal= ($"Elindultál balra. A völgyben egyre messzebb és messzebb sétálsz, amikor meglátsz egy érdekes alakot. Mit teszel, {nev}?");
+                    string bal= ($"Elindultál balra.\r\nA völgyben egyre messzebb és messzebb sétálsz, amikor meglátsz egy érdekes alakot. \r\nMit teszel, {nev}?");
                     string[] szavakKetto = bal.Split(' ');
 
                     foreach (string szo in szavakKetto)
@@ -283,7 +318,7 @@ namespace projectMunkaGB
                     // ELSŐ VÁLASZTÁS: ELŐRE MÉSZ AZ ALAKHOZ
                     if (elagazas2 == ConsoleKey.D1 || elagazas2 == ConsoleKey.NumPad1)
                     {
-                        string alakFelé = ($"Elindulsz az alak felé...Ahogy közeledsz, az alak egyre inkább felismerhetővé válik... a hideg ráz ki, de felismered: csak egy idős néni.\nA néninek beakadt a ruhája. Mit teszel, {nev}?");
+                        string alakFelé = ($"Elindulsz az alak felé... Ahogy közeledsz, az alak egyre inkább felismerhetővé válik... a hideg ráz ki, de felismered: csak egy idős néni.\r\nA néninek beakadt a ruhája.\r\nMit teszel, {nev}?");
                         string[] szavakKetto2 = alakFelé.Split(' ');
 
                         foreach (string szo in szavakKetto2)
@@ -308,7 +343,7 @@ namespace projectMunkaGB
 
                         if (valasztas3 == ConsoleKey.D1 || valasztas3 == ConsoleKey.NumPad1)
                         {
-                            string segit = ("Segítesz az idős hölgynek,az idős hölgy megköszinni és ad neked egy varázsitalt és ezzel együtt ki is vezet a völgyből.");
+                            string segit = ("Segítesz az idős hölgynek. \r\n Az idős hölgy megköszinni és ad neked egy varázsitalt és ezzel együtt ki is vezet a völgyből.");
                             string[] szavakKetto18 = segit.Split(' ');
 
                             foreach (string szo in szavakKetto18)
@@ -323,7 +358,7 @@ namespace projectMunkaGB
                         }
                         else if (valasztas3 == ConsoleKey.D2 || valasztas3 == ConsoleKey.NumPad2)
                         {
-                            string otthagy = ("Otthagyod az idős hölgyet, és továbbmész.\n Hirtelen zajt hallasz a fák közül, és rájössz, hogy eltévedtél..látsz veled szemben egy hatalmas árnyat de mire felfognád rád támad,menekülni sem tudsz");
+                            string otthagy = ("Otthagyod az idős hölgyet, és továbbmész.\r\n Hirtelen zajt hallasz a fák közül, és rájössz, hogy eltévedtél... Látsz veled szemben egy hatalmas árnyat, de mire felfognád, rád támad, menekülni sem tudsz.");
                             string[] szavakKetto15 = otthagy.Split(' ');
 
                             foreach (string szo in szavakKetto15)
@@ -339,13 +374,35 @@ namespace projectMunkaGB
                         else
                         {
                             Console.WriteLine("Nincs ilyen választási lehetőség.");
+                            Thread.Sleep(1500);
+                            Console.Clear();
                             goto valasz1;
                         }
                     }
                     // ELSŐ VÁLASZTÁS: VISSZAFELÉ MÉSZ
                     else if (elagazas2 == ConsoleKey.D2 || elagazas2 == ConsoleKey.NumPad2)
                     {
-                        string vissza = ("Visszafelé indulsz..viszont rossz irányba mész,de nagy csodálkozásodra megtaláltad a barátaidat akik egy tűz körül ültek");
+                        string vissza = ("Visszafelé indulsz... viszont rossz irányba mész, de nagy csodálkozásodra megtaláltad a barátaidat, akik egy tűz körül ültek.");
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+                        Console.WriteLine(@"                .
+            (                 ,&&&.
+             )                .,.&&
+            (  (              \=__/
+                )             ,'-'.
+          (    (  ,,      _.__|/ /|
+           ) /\ -((------((_|___/ |
+         (  // | (`'      ((  `'--|
+       _ -.;_/ \\--._      \\ \-._/.
+      (_;-// | \ \-'.\    <_,\_\`--'|
+      ( `.__ _  ___,')      <_,-'__,'
+       `'(_ )_)(_)_)'
+");
+
+                        Console.ResetColor();
+
+
                         string[] szavakKetto16 = vissza.Split(' ');
 
                         foreach (string szo in szavakKetto16)
@@ -360,6 +417,8 @@ namespace projectMunkaGB
                     else
                     {
                         Console.WriteLine("Nincs ilyen választási lehetőség.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
                         goto irany1;
 
                     }
@@ -373,7 +432,7 @@ namespace projectMunkaGB
                     Console.Clear();
                 valasztas6:
 
-                    string templom = $"Elindulsz jobbra.\n Nem sokkal később meglátsz egy hatalmas templomot,amiból fény jön ki. \n Mit teszel{nev}? \n 1:Felmész a templomba? | 2: Megdobod egy kővel azt az ablakot ahol világos van";
+                    string templom = $"Elindulsz jobbra.\r\n Nem sokkal később meglátsz egy hatalmas templomot, amiből fény jön ki.\r\n Mit teszel, {nev}? \r\n1: Felmész a templomba? | 2: Megdobod egy kővel azt az ablakot, ahol világos van";
                     string[] szavakKetto17 = templom.Split(' ');
 
                     foreach (string szo in szavakKetto17)
@@ -417,7 +476,8 @@ namespace projectMunkaGB
 
                     if (elagazas3 == ConsoleKey.D1 || elagazas3 == ConsoleKey.NumPad1)
                     {
-                        string fel = ($"Felmész a templomba.\n Legfelül meglátsz egy szép kis erdőt,tele fákkal\n Az egyik fából kijön egy kis tündér,aki azt mondta:'Felteszek neked egy kérdes,ha tudod a választ ifjú ember,kisegítünk a völgyből!\n'Ime a kérdés: \n   Petőfi Sándor melyik híres elbeszélő költeményének a főhőse Kukorica Jancsi, aki a történet végén Tündérország fejedelme lesz?' Mi a helyes válasz {nev}? 1:János vitéz | 2:Toldi ");
+                        string fel = ($"Felmész a templomba.\r\n Legfelül meglátsz egy szép kis erdőt, tele fákkal.\r\n Az egyik fából kijön egy kis tündér, aki azt mondta: „Felteszek neked egy kérdést, ha tudod a választ, ifjú ember, kisegítünk a völgyből!”\r\n Íme a kérdés: \r\n Petőfi Sándor melyik híres elbeszélő költeményének a főhőse Kukorica Jancsi, aki a történet végén Tündérország fejedelme lesz? \r\n");
+
                         string[] szavakKetto1 = fel.Split(' ');
 
                         foreach (string szo in szavakKetto1)
@@ -425,6 +485,37 @@ namespace projectMunkaGB
                             Console.Write(szo + " ");
                             Thread.Sleep(150);
                         }
+                    tunderkerdes:
+                        string kerdes = ($"Mi a helyes válasz, {nev}? 1: János vitéz | 2: Toldi");  
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+
+                        Console.WriteLine(@"                .
+                              _                           _
+     / `._        \+O+/        _.' \
+    ( @ : `.      //`\\      .' : @ )
+     \  `.  `.   ((a a))   .'  .'  /
+      \;' `.  `.((( - ))).'  .' `;/
+       \`.  `.  ((()=()))  .'  .'/
+        ) :-._`/`((""Y""))`\'_.-: (
+        (`..../ /(_ * _)\ \....')
+         >---/ /  )   (  \ \---<
+        / .'.\ \_/\\_//\_/ /.'. \
+        |o _.-\/_) '*' (_\/-._ o|
+        |`'   ;/         \;   `'|
+        "".o_.-/           \-._o.""
+          ""._/             \_.""
+            /               \
+           /                 \
+          /                   \
+         /                     \
+        /                       \
+        `----....._____.....----'
+------------------------------------------------
+
+");
+                        Console.ResetColor();
+                        Console.WriteLine(kerdes);
+                        Console.ResetColor();
                         valasztas4 = Console.ReadKey(true).Key;
                         Console.Clear();
                         if (valasztas4 == ConsoleKey.D1 || valasztas4 == ConsoleKey.NumPad1)
@@ -445,6 +536,9 @@ namespace projectMunkaGB
                         else
                         {
                             Console.WriteLine("Nincs ilyen választási lehetőség.");
+                            Thread.Sleep(1500);
+                            Console.Clear();
+                            goto tunderkerdes;
                         }
 
                     }
@@ -458,6 +552,49 @@ namespace projectMunkaGB
                             Console.Write(szo + " ");
                             Thread.Sleep(150);
                         }
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine(@"                .
+       _
+       ///-._
+      ////////-._
+     /////////////-.
+    ////////////////`.
+   //////////////// .'`.
+  //////////////// . '.'`.
+ '|`'//////////// . .'.::|`
+  :    `'///////   . '.':|
+  |  .   . `'//  ' _|- ::|
+  |.  .-._  . | .   | .'::
+  |   |:|:|   |  ' ' '.::|
+  |   |:|:|   :.  . .'.':|
+  | . |:|:| . |    .._.:::
+  :    `':|   |  ' ////-:|
+  |.    .     |  '/////////-._
+  |   .     . : .//////////////-._
+  :           : ///////////////////-._
+  |.          |////////////////////////-._
+  |    .  .   :`'//////////////////////////-._
+  | .       _.-\\\\``'//////////////////////////-._
+  |        /\\\\\\\\..``'//////////////////////////"".
+  :  .  . /. \\\\\\\\\.  .``'///////////////////// .'`.
+  :      /  _ \\\\\\\\\.      ``'//////////////// .  .'`.
+  | .   /  (@) \\\\\\\\\.  . .    ``'/////////// .  '.'::|.
+ {`)._ '|  _`  .\\\\\\\-`:|#|  .  .   ``'//////   '. .'.:|
+  `-{_/`| ||::.  \\'`.:|:.|#| |#|  .      ``'/  ' .##:':::
+      `-| |||||  |`.'::|::|#| |#| |#|  .  . '| . .|##|'.:|
+        | |||||  : .'::|:.'#| |#| |#| |#|    |    |##|'::|
+        | ||||| .| .'.:|::.'' '#| |#| |#| .  :  ' |##|'.:|
+       {`\:||||  : .'::|:_.:.  .  '#| |#|    |   .|##|':::
+        `-{_/'|_ |_.-'/}_/'-._        '#|    :.   |##:'.:|
+           `'{._('}_)-'  `-}_}(-._ .    .    |  ' '` .'::|
+                `-'          `-.} /-._    .  :   .'.'_:-'\
+                                 `-}_}(-._   | . _.-')_(-'
+                                     `-/_)`-.:.-{ \{-'
+                                         `-{_'_)-''
+
+");
+                        
+                        Console.ResetColor();
                         Console.WriteLine("\n\nNyomj meg egy billentyűt a folytatáshoz...");
                         bilo = Console.ReadKey(true).Key;
                         goto veg9;
@@ -465,6 +602,8 @@ namespace projectMunkaGB
                     else
                     {
                         Console.WriteLine("Nincs ilyen választási lehetőség.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
                         goto valasztas6;
 
                     }
@@ -474,12 +613,13 @@ namespace projectMunkaGB
                 {
                     Console.WriteLine("Nincs ilyen választási lehetőség.");
                     Thread.Sleep(1500);
+                    Console.Clear();
                     goto jatekVegeCiklus;
                 }
 
             veg:
                 Console.Clear();
-                string veg = ("Ügyes vagy eltaláltad! A bácsi kivezetett a völgyből és a barátaid már kint vártak!");
+                string veg = ("Ügyes vagy, eltaláltad! \r\n A bácsi kivezetett a völgyből, és a barátaid már kint vártak!");
                 string[] szavakKetto4 = veg.Split(' ');
 
                 foreach (string szo in szavakKetto4)
@@ -492,7 +632,7 @@ namespace projectMunkaGB
 
             veg2:
                 Console.Clear();
-                string veg2 = ($"Meghaltál a medve által..\n Elfogytak a pontjaid. HP: {HP}");
+                string veg2 = ($"Meghaltál a medve által...\r\n Elfogytak a pontjaid. HP: {HP}");
                 string[] szavakKetto5 = veg2.Split(' ');
 
                 foreach (string szo in szavakKetto5)
@@ -505,7 +645,7 @@ namespace projectMunkaGB
 
             veg3:
                 Console.Clear();
-                string veg3 = ($"Meghaltál a bácsi által..\n Elfogytak a pontjaid. HP: {HP}");
+                string veg3 = ($"Meghaltál a bácsi által... Elfogytak a pontjaid. HP: {HP}");
                 string[] szavakKetto6 = veg3.Split(' ');
 
                 foreach (string szo in szavakKetto6)
@@ -517,7 +657,7 @@ namespace projectMunkaGB
                 goto jatekVegeCiklus;
             veg4:
                 Console.Clear();
-                string veg4 = ("Az idős hölgy kivezetett a völgyböl veled együtt, elmondta neked hogy ő egy boszi és ha megiszod az italát te is az lehetel.");
+                string veg4 = ("Az idős hölgy kivezetett a völgyből veled együtt, elmondta neked, hogy ő egy boszi, és ha megiszod az italát, te is az lehetsz.");
                 string[] szavakKetto7 = veg4.Split(' ');
 
                 foreach (string szo in szavakKetto7)
@@ -529,7 +669,7 @@ namespace projectMunkaGB
                 goto jatekVegeCiklus;
             veg5:
                 Console.Clear();
-                string veg5 = ("Elsem tudtál futni az árnytól így magával vitt a sötétségbe.");
+                string veg5 = ("El sem tudtál futni az árnyék elől, így magával vitt a sötétségbe.");
                 string[] szavakKetto8 = veg5.Split(' ');
 
                 foreach (string szo in szavakKetto8)
@@ -541,7 +681,7 @@ namespace projectMunkaGB
                 goto jatekVegeCiklus;
             veg6:
                 Console.Clear();
-                string veg6 = ("A barátaid nagyon megijedtek tőled,egyik hozzád hajított egy botot.\n Viszont amikor felismertek rettentően megörültek neked.\n Eloltottátok a tüzet és együtt haza mentettek.");
+                string veg6 = ("A barátaid nagyon megijedtek tőled, egyik hozzád hajított egy botot.\r\n Viszont amikor felismertek, rettentően megörültek neked.\r\n Eloltottátok a tüzet, és együtt hazamentetek.");
                 string[] szavakKetto9 = veg6.Split(' ');
 
                 foreach (string szo in szavakKetto9)
@@ -553,7 +693,7 @@ namespace projectMunkaGB
                 goto jatekVegeCiklus;
             veg7:
                 Console.Clear();
-                string veg7 = ("A tündér felkapott és kirepültettek a völgyből.");
+                string veg7 = ("A tündér felkapott, és kirepített a völgyből.");
                 string[] szavakKetto10 = veg7.Split(' ');
 
                 foreach (string szo in szavakKetto10)
@@ -565,7 +705,7 @@ namespace projectMunkaGB
                 goto jatekVegeCiklus;
             veg8:
                 Console.Clear();
-                string veg8 = ("Egyedül maradtál a templomba.\n Ahogy elindultál lefelé hatalmas pókok támadtak rád..nem élted túl.");
+                string veg8 = ("Egyedül maradtál a templomban.\r\n Ahogy elindultál lefelé, hatalmas pókok támadtak rád.\r\n Nem élted túl.");
                 string[] szavakKetto11 = veg8.Split(' ');
 
                 foreach (string szo in szavakKetto11)
@@ -577,7 +717,7 @@ namespace projectMunkaGB
                 goto jatekVegeCiklus    ;
             veg9:
                 Console.Clear();
-                string veg9 = ("Amikor felérsz a templom tetejére,egy csomó kis tündér mérgesen vár téged és rád támadtak..sikerült elfutnod előlül viszont rengeteg sebed marad.\n Sok séta után megtaláltad a kocsittokat amivel jötettek és ott vártad a barátaidat.");
+                string veg9 = ("Amikor felérsz a templom tetejére, egy csomó kis tündér mérgesen vár téged, és rád támadnak... Sikerült elfutnod előlük, viszont rengeteg sebed maradt. \r\nSok séta után megtaláltad a kocsitokat, amivel jöttetek, és ott vártad a barátaidat..");
                 string[] szavakKetto12 = veg9.Split(' ');
 
                 foreach (string szo in szavakKetto12)
@@ -588,11 +728,29 @@ namespace projectMunkaGB
                 Thread.Sleep(150);
                 goto jatekVegeCiklus;
 
+
             jatekVegeCiklus:
-                Console.WriteLine("\nNyomj meg egy gombot a menühöz (Kilépés: ESC)");
-                billentyu = Console.ReadKey(true).Key;
+                Console.WriteLine();
+                string ujraJatszani = "Szeretnél újra játszani? \r\n ENTER - Igen\r\n ESCAPE - Nem";
+                string[] szavakKetto19 = ujraJatszani.Split(' ');
+
+                foreach (string szo in szavakKetto19)
+                {
+                    Console.Write(szo + " ");
+                    Thread.Sleep(150);
+                }
+
+                do
+                {
+                    billentyu = Console.ReadKey(true).Key;
+
+                } while (billentyu != ConsoleKey.Enter &&
+                         billentyu != ConsoleKey.Escape);
 
             } while (billentyu != ConsoleKey.Escape);
+
+            Console.Clear();
+            Console.WriteLine("Köszönöm, hogy játszottál!");
         }
     }
 }
